@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Главная страница</h1>
+
+  <p>Добро пожаловать в сервис <em>Вкурсе</em> - сервис размещения и поиска мероприятий.</p>
+
+<h2>Динамический контент</h2>
+
+  <p>Вкусре содержит:</p>
+  <ul>
+    <li><strong>Мероприятия:</strong> {{ num_events }}</li>
+    <li><strong>Категории:</strong> {{ num_categorys }}</li>
+    <li><strong>Типы мероприятий:</strong> {{ num_types }}</li>
+    <li><strong>Доступных мероприятий:</strong> {{ num_events_avalible }}</li>
+  </ul>
+
+{% endblock %}

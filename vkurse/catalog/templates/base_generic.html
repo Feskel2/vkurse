@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  {% block title %}<title>Сервис размещения и поиска мероприятий</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Добавление дополнительного статического CSS файла -->
+  {% load static %}
+  <link rel="stylesheet" href="{% static '/css/styles.css' %}">
+
+</head>
+
+<body>
+
+  <div class="container-fluid">
+
+    <div class="row ">
+      <div class="col-sm-2 ">
+      {% block sidebar %}
+      <ul class="nav flex-column">
+          <li class="nav-item mt-5">
+            <a class="nav-link {% if index == request.path %}active{% endif %}" href="{% url 'index' %}">Главная</a>
+          </li>
+          <li class="nav-item {% if events == request.path %}active{% endif %}">
+            <a class="nav-link" href="{% url 'events' %}">Все мероприятия</a>
+          </li>
+
+          <li class="nav-item {% if events == request.path %}active{% endif %}">
+            <a class="nav-link" href="">Авторизация</a>
+          </li>
+
+                    <li class="nav-item {% if events == request.path %}active{% endif %}">
+            <a class="nav-link" href="">Регистрация</a>
+          </li>
+
+          <li class="mt-50 nav-item {% if events == request.path %}active{% endif %}">
+            <a class="nav-link btn-danger" href="">Выход</a>
+          </li>
+
+      </ul>
+
+          <br> {{user}}
+     {% endblock %}
+      </div>
+      <div class="col-sm-10 ">
+      {% block content %}{% endblock %}
+
+
+
+
+          {% block pagination %}
+          {% if is_paginated %}
+              <div class="pagination">
+                  <span class="page-links">
+                      {% if page_obj.has_previous %}
+                          <a href="{{ request.path }}?page={{ page_obj.previous_page_number }}">Назад</a>
+                      {% endif %}
+                      <span class="page-current">
+                          Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                      </span>
+                      {% if page_obj.has_next %}
+                          <a href="{{ request.path }}?page={{ page_obj.next_page_number }}">Вперед</a>
+                      {% endif %}
+                  </span>
+              </div>
+          {% endif %}
+        {% endblock %}
+
+
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+
+
+
+</body>
+</html>

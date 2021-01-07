@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>Список мероприятий</h1>
+
+    {% if my_event_list %}
+    <ul>
+
+      {% for event in my_event_list %}
+      <li>
+        <a href="{{ event.get_absolute_url }}">{{ event.name }}</a> </br> {{ event.subject | truncatewords:5 }}</br></br>
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>Нет мероприятий.</p>
+    {% endif %} 
+{% endblock %}
