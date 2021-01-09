@@ -23,15 +23,17 @@
       <div class="col-sm-2 ">
       {% block sidebar %}
       <ul class="nav flex-column">
+          {% url 'index' as  index_page %}
           <li class="nav-item mt-5">
-            <a class="nav-link {% if index == request.path %}active{% endif %}" href="{% url 'index' %}">Главная</a>
+            <a class="nav-link {% if index_page == request.path %}active{% endif %}" href="{{ index_page }}">Главная</a>
           </li>
-          <li class="nav-item {% if events == request.path %}active{% endif %}">
-            <a class="nav-link" href="{% url 'events' %}">Все мероприятия</a>
+          {% url 'events' as  events_page %}
+          <li class="nav-item {% if events_page == request.path %}active{% endif %}">
+            <a class="nav-link" href="{{ events_page }}">Все мероприятия</a>
           </li>
-
-          <li class="nav-item {% if events == request.path %}active{% endif %}">
-            <a class="nav-link" href="">Авторизация</a>
+          {% url 'login' as  login_page %}
+          <li class="nav-item {% if login == request.path %}active{% endif %}">
+            <a class="nav-link" href="{{login}}">Авторизация</a>
           </li>
 
                     <li class="nav-item {% if events == request.path %}active{% endif %}">

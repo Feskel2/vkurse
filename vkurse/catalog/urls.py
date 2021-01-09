@@ -13,4 +13,5 @@ urlpatterns = [
     #path('ev/id<str:id>_<str:slug>/', views.EventDetailView.as_view(), name='event-detail'),
     #path(r'^ev/(?Pid<id>_<slug>\d+)$', views.EventDetailView.as_view(), name='event-detail'),
     path('ev/id<pk>', views.EventDetailView.as_view(), name='event-detail'),
+    path('login', views.UserLoginView.as_view(), name='login_page'),
 ]

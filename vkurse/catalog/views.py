@@ -1,6 +1,9 @@
 from django.shortcuts import render
-from .models import Event, Category, Type, User
+from .models import Event, Category, Type
+from django.urls import reverse, reverse_lazy
 from django.views import generic
+from .forms import AuthUserForm
+#, User
 
 """
 Удалить все что ниже если не буедт работать
@@ -54,8 +57,8 @@ class EventDetailView(generic.DetailView):
 """
 Удалить все что ниже если не буедт работать
 """
+
 class UserLoginView(LoginView):
-    model = User
-    template_name = 'login.thml'
+    template_name = 'catalog/login.thml'
     form_class = AuthUserForm
     success_url = reverse_lazy ('index')
