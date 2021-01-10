@@ -23,26 +23,39 @@
       <div class="col-sm-2 ">
       {% block sidebar %}
       <ul class="nav flex-column">
+
           {% url 'index' as  index_page %}
           <li class="nav-item mt-5">
             <a class="nav-link {% if index_page == request.path %}active{% endif %}" href="{{ index_page }}">Главная</a>
           </li>
+
           {% url 'events' as  events_page %}
           <li class="nav-item {% if events_page == request.path %}active{% endif %}">
             <a class="nav-link" href="{{ events_page }}">Все мероприятия</a>
           </li>
-          {% url 'login' as  login_page %}
-          <li class="nav-item {% if login == request.path %}active{% endif %}">
-            <a class="nav-link" href="{{login}}">Авторизация</a>
-          </li>
 
-                    <li class="nav-item {% if events == request.path %}active{% endif %}">
-            <a class="nav-link" href="">Регистрация</a>
-          </li>
+          {% if request.user.is_authenticated %}
 
-          <li class="mt-50 nav-item {% if events == request.path %}active{% endif %}">
-            <a class="nav-link btn-danger" href="">Выход</a>
-          </li>
+              {% url 'logout_page' as  url_logout_page %}
+              <li class="mt-50 nav-item {% if events == request.path %}active{% endif %}">
+                <a class="nav-link btn-danger" href="{{ url_logout_page }}">Выход</a>
+              </li>
+
+          {% else %}
+
+
+              {% url 'login_page' as  utl_login_page %}
+              <li class="nav-item {% if utl_login_page == request.path %}active{% endif %}">
+                <a class="nav-link" href="{{ utl_login_page }}">Авторизация</a>
+              </li>
+
+                {% url 'registr_page' as  url_registr_page %}
+                <li class="nav-item {% if url_registr_page == request.path %}active{% endif %}">
+                <a class="nav-link" href="{{ url_registr_page }}">Регистрация</a>
+              </li>
+
+         {% endif %}
+
 
       </ul>
 

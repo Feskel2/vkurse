@@ -2,7 +2,12 @@ from django.shortcuts import render
 from .models import Event, Category, Type
 from django.urls import reverse, reverse_lazy
 from django.views import generic
-from .forms import AuthUserForm
+from .forms import AuthUserForm, RegistrUserForm
+from django.contrib.auth.models import User
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import authenticate, login
+
 #, User
 
 """
@@ -59,6 +64,27 @@ class EventDetailView(generic.DetailView):
 """
 
 class UserLoginView(LoginView):
-    template_name = 'catalog/login.thml'
+    template_name = 'catalog/login.html'
     form_class = AuthUserForm
     success_url = reverse_lazy ('index')
+    def get_success_url(self):
+        return self.success_url
+
+
+# class UserRegistrView(CreateView):
+
+class UserRegistrView(CreateView):
+    template_name = 'catalog/registration.html'
+    form_class = RegistrUserForm
+    success_url = reverse_lazy ('index')
+    success_msg = 'Пользователь успешно создан'
+    def form_valid(self, form):
+        form_valid = super().form_valid(form)
+        username = form.cleaned_data["username"]
+        password = form.cleaned_data["password"]
+        aut_user = authenticate (username=username, password=password)
+        login (self.request, aut_user)
+        return form_valid
+
+class UserLogout(LogoutView):
+    next_page = reverse_lazy ('index')
