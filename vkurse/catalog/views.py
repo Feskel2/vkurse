@@ -88,3 +88,15 @@ class UserRegistrView(CreateView):
 
 class UserLogout(LogoutView):
     next_page = reverse_lazy ('index')
+
+
+
+def edit_event(request):
+    template_name = 'catalog/edit_event.html'
+    context = {
+
+
+
+    }
+    # success_url = reverse_lazy ('index')
+    return render(request, template_name, context)

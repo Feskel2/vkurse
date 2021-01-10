@@ -16,4 +16,5 @@ urlpatterns = [
     path('login', views.UserLoginView.as_view(), name='login_page'),
     path('registration', views.UserRegistrView.as_view(), name='registr_page'),
     path('logout', views.UserLogout.as_view(), name='logout_page'),
+    path('editev', views.edit_event, name='editev'),
 ]

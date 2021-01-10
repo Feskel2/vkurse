@@ -5,10 +5,10 @@
   {% block title %}<title>Сервис размещения и поиска мероприятий</title>{% endblock %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
   <!-- Добавление дополнительного статического CSS файла -->
   {% load static %}
   <link rel="stylesheet" href="{% static '/css/styles.css' %}">
@@ -35,6 +35,10 @@
           </li>
 
           {% if request.user.is_authenticated %}
+                {% url 'editev' as  url_editev %}
+                    <li class="mt-50 nav-item {% if url_editev == request.path %}active{% endif %}">
+                    <a class="nav-link" href="{{ url_editev }}">Создание/ред/удал</a>
+                    </li>
 
               {% url 'logout_page' as  url_logout_page %}
               <li class="mt-50 nav-item {% if events == request.path %}active{% endif %}">
