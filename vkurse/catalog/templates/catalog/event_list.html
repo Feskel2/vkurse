@@ -1,19 +1,52 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    <h1>Список мероприятий</h1>
+    <h1 class="">Список мероприятий</h1>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mt-4 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Добавить мероприятие
+</button>
+
+
 
     {% if my_event_list %}
     <ul>
 
       {% for event in my_event_list %}
       <li>
-        <a href="{{ event.get_absolute_url }}">{{ event.name }}</a> </br> {{ event.subject | truncatewords:5 }}</br></br>
+        <a href="{{ event.get_absolute_url }}">{{ event.name }}</a> <a href="{{ url 'edit_page' }}">Редактировать</a>
+          </br> {{ event.subject | truncatewords:5 }}</br></br>
       </li>
       {% endfor %}
 
     </ul>
     {% else %}
       <p>Нет мероприятий.</p>
-    {% endif %} 
+    {% endif %}
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить мероприятие</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="add_form" method="post" action="">
+            {% csrf_token %}
+            {{form}}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+        <button form="add_form" type="submit" class="btn btn-primary">Добавить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 {% endblock %}

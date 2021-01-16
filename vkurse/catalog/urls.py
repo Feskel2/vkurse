@@ -13,8 +13,14 @@ urlpatterns = [
     #path('ev/id<str:id>_<str:slug>/', views.EventDetailView.as_view(), name='event-detail'),
     #path(r'^ev/(?Pid<id>_<slug>\d+)$', views.EventDetailView.as_view(), name='event-detail'),
     path('ev/id<pk>', views.EventDetailView.as_view(), name='event-detail'),
+
+    path('new/id<pk>', views.EventsCreateView.as_view(), name='new_page'),
+    path('edit/id<pk>', views.EventsUpdateView.as_view(), name='edit_page'),
+    path('delete/id<pk>', views.EventsUpdateView.as_view(), name='delete_page'),
+
+
     path('login', views.UserLoginView.as_view(), name='login_page'),
     path('registration', views.UserRegistrView.as_view(), name='registr_page'),
     path('logout', views.UserLogout.as_view(), name='logout_page'),
-    path('editev', views.edit_event, name='editev'),
 ]
+

@@ -1,5 +1,5 @@
 from django import forms
-# from .models import User
+from .models import Event
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
@@ -33,3 +33,12 @@ class RegistrUserForm (forms.ModelForm):
             user.save()
         return user
 
+class AddEventsForm(forms.ModelForm):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+                self.fields[field].widget.attrs['class'] = 'form-control'
