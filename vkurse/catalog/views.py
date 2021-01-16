@@ -99,7 +99,7 @@ class EventDetailView(generic.DetailView):
     model = Event
     context_object_name = 'event'   # ваше собственное имя переменной контекста в шаблоне
     #queryset = Event.objects.filter(name__icontains='war')[:5] # Получение 5 книг, содержащих слово 'war' в заголовке
-    template_name = 'catalog/event_detail.html'  # Определение имени вашего шаблона и его расположения
+    template_name = 'event_detail.html'  # Определение имени вашего шаблона и его расположения
 
 
 
@@ -108,7 +108,7 @@ class UserLoginView(LoginView):
     """
     Страница логина пользователя
     """
-    template_name = 'catalog/login.html'
+    template_name = 'login.html'
     form_class = AuthUserForm
     success_url = reverse_lazy ('index')
     def get_success_url(self):
@@ -120,7 +120,7 @@ class UserRegistrView(CreateView):
     """
     Страница регистрации пользователя
     """
-    template_name = 'catalog/registration.html'
+    template_name = 'registration.html'
     form_class = RegistrUserForm
     success_url = reverse_lazy ('index')
     success_msg = 'Пользователь успешно создан'
